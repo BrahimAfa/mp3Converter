@@ -9,6 +9,7 @@ COPY package*.json ./
 
 RUN npm i
 
+RUN npm i -g pm2
 
 COPY . .
 

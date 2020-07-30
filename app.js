@@ -4,7 +4,7 @@ const execa = require("execa");
 
 app.get('/:list',async (req,res)=>{
     try{
-        const {stdout} = await execa('', [req.params.list]);
+        const {stdout} = await execa('youtube-dl ',["-x", "--print-json" ,"--no-warnings", "--audio-format mp3","https://www.youtube.com/playlist?list=PLETIo5u_JSiOrahkO8xY5tvzh8O4PLJA1"]);
         console.log(stdout);
         
     }catch(ex){
