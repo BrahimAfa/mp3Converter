@@ -4,15 +4,14 @@ const execa = require("execa");
 
 app.get('/:list',async (req,res)=>{
     try{
-        const {stdout} = await execa('youtube-dl',["-x", "--print-json" ,"--no-warnings", "--audio-format mp3","https://www.youtube.com/watch?v=NjN4rOBZV2s"]);
-        console.log(stdout);
-        
+         execa('youtube-dl',["-x", "--print-json" ,"--no-warnings", "--audio-format","mp3","https://www.youtube.com/playlist?list=PLETIo5u_JSiOrahkO8xY5tvzh8O4PLJA1","|","jq","-r",".title"]).stdout.pipe(process.stdout);
+         res.staus(200).send("END");
     }catch(ex){
         console.log(ex);
+        res.staus(400).json(ex.message);
     }
-    res.status(200).json(stdout);
 });
 
-app.listen("9988",()=>{
-    console.log("running on 9988 🚀")
+app.listen("3030",()=>{
+    console.log("running on 3030 🚀")
 })
