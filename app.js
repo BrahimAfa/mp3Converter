@@ -2,9 +2,9 @@ const express = require("express");
 const app = express();
 const execa = require("execa");
 let yt_dl;
-app.get('/start/:list',async (req,res)=>{
+app.all('/start/:id',async (req,res)=>{
     try{
-        yt_dl= execa('youtube-dl',["-x","-o","./mp3/%(title)s.%(ext)s","--no-warnings", "--audio-format","mp3",req.params.list])
+        yt_dl= execa('youtube-dl',["-x","-o","./mp3/%(title)s.%(ext)s","--no-warnings", "--audio-format","mp3",`https://www.youtube.com/playlist?list=${req.params.id}`])
         // youtube-dl -x -e -o './mp3/%(title)s.%(ext)s' --no-warnings --audio-format mp3 https://www.youtube.com/playlist?list=PLETIo5u_JSiOrahkO8xY5tvzh8O4PLJA1
         yt_dl.stdout.pipe(process.stdout);
          res.status(200).send("Started");
@@ -14,7 +14,7 @@ app.get('/start/:list',async (req,res)=>{
     }
 });
 
-app.get('/end',async (req,res)=>{
+app.all('/end',async (req,res)=>{
     try{
         console.log("in END ==>",yt_dl);
         yt_dl.kill('SIGTERM', {
