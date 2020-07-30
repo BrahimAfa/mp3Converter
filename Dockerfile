@@ -1,7 +1,7 @@
 FROM node:12-stretch
 
-RUN sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-RUN sudo chmod a+rx /usr/local/bin/youtube-dl
+RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+RUN chmod a+rx /usr/local/bin/youtube-dl
 
 WORKDIR /app
 
@@ -13,6 +13,6 @@ RUN npm i -g pm2
 
 COPY . .
 
-EXPOSE 3030
+EXPOSE 9988
 
 CMD ["pm2-runtime", "app.js"]
