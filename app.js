@@ -4,8 +4,8 @@ const execa = require("execa");
 let yt_dl;
 app.all('/start/:id',async (req,res)=>{
     try{
-        yt_dl= execa('youtube-dl',["-x","-o","./mp3/%(title)s.%(ext)s","--no-warnings", "--audio-format","mp3",`https://www.youtube.com/playlist?list=${req.params.id}`])
-        // youtube-dl -x -e -o './mp3/%(title)s.%(ext)s' --no-warnings --audio-format mp3 https://www.youtube.com/playlist?list=PLETIo5u_JSiOrahkO8xY5tvzh8O4PLJA1
+        yt_dl= execa('youtube-dl',["-x","--no-progress","-o","./mp3/%(title)s.%(ext)s","--no-warnings", "--audio-format","mp3",`https://www.youtube.com/playlist?list=${req.params.id}`])
+      //  youtube-dl -x -o './mp3/%(title)s.%(ext)s' --no-warnings --audio-format mp3 https://www.youtube.com/playlist?list=PLETIo5u_JSiOrahkO8xY5tvzh8O4PLJA1
         yt_dl.stdout.pipe(process.stdout);
          res.status(200).send("Started");
     }catch(ex){
