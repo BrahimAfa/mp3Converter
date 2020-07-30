@@ -12,6 +12,6 @@ app.get('/:list',async (req,res)=>{
     }
 });
 
-app.listen("3030",()=>{
-    console.log("running on 3030 🚀")
+app.listen("9988",()=>{
+    console.log("running on 9988 🚀")
 })
