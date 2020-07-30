@@ -1,4 +1,6 @@
-FROM node:12-stretch
+# docker run --name mp3_dl -p 9988:9988 -v $(pwd):/app/mp3/ -d mp3_dl
+
+FROM node:12-stretch-slim
 
 RUN curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
 RUN chmod a+rx /usr/local/bin/youtube-dl
