@@ -79,7 +79,7 @@ app.get('/playlist/:id',async (req,res)=>{
 
 app.all('/download',async (req,res)=>{
     try{
-        res.download(__dirname + '/myMusic.zip',(err)=>{console.log("download express ERROR : ",err);}).;
+        res.download(__dirname + '/myMusic.zip',(err)=>{console.log("download express ERROR : ",err)});
     }catch(ex){
         console.log(ex);
         res.status(400).json(ex.message);
