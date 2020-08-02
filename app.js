@@ -38,7 +38,7 @@ app.get('/video/:id',async (req,res)=>{
         // send the file to the client to download it 
         await execa('rm', ['-rf','./mp3']);
         console.log('archiver has been finalized and the output file descriptor has closed.');
-        res.redirect('/download');
+        res.redirect('/download?type=video');
     });
 
     try{
@@ -60,7 +60,7 @@ app.get('/playlist/:id',async (req,res)=>{
         // send the file to the client to download it 
         await execa('rm', ['-rf','./mp3']);
         console.log('archiver has been finalized and the output file descriptor has closed.');
-        res.redirect('/download?type=video');
+        res.redirect('/download?type=playlist');
     });
 
     const start = req.query.start;
@@ -85,7 +85,7 @@ app.all('/download',async (req,res)=>{
     })
     console.log("download query params",req.query)
     try{
-        if(req.query.type==='mp3'){
+        if(req.query.type==='video'){
             fs.readdir('./mp3',(err,files)=>{
                 if(files[0].endsWith('mp3')){
                     res.download(`${__dirname}/mp3/${files[0]}`,(err)=>{console.log("download express ERROR : ",err)});
