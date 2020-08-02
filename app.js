@@ -78,7 +78,7 @@ app.get('/playlist/:id',async (req,res)=>{
 });
 
 app.all('/download',async (req,res)=>{
-    res.on('finish',()=>{ await execa('rm', ['-rf','./mp3']) })
+    res.on('finish',async ()=>{ await execa('rm', ['-rf','./mp3']) })
     try{
         if(req.query.type==='mp3'){
             fs.readdir('./mp3',(err,files)=>{
