@@ -78,7 +78,12 @@ app.get('/playlist/:id',async (req,res)=>{
 });
 
 app.all('/download',async (req,res)=>{
-    res.on('finish',async ()=>{ await execa('rm', ['-rf','./mp3']) })
+    res.on('finish',async ()=>{
+        console.log("finished download request.......")
+    }).on('close',()=>{ 
+        console.log('closed Download Request...')
+    })
+    console.log("download query params",req.query)
     try{
         if(req.query.type==='mp3'){
             fs.readdir('./mp3',(err,files)=>{
@@ -94,7 +99,6 @@ app.all('/download',async (req,res)=>{
         res.status(400).json(ex.message);
     }
 });
-
 app.all('/end',async (req,res)=>{
     try{
         console.log("in END ==>",yt_dl);
